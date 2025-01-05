@@ -1,0 +1,45 @@
+﻿[Arrow]
+Path=Red Pulse - Normal Select.ani
+
+[Help]
+Path=Red Pulse - Help Select.ani
+
+[AppStarting]
+Path=Red Pulse - Working.ani
+
+[Wait]
+Path=Red Pulse - Busy.ani
+
+[Crosshair]
+Path=Red Pulse - Precision Select.ani
+
+[IBeam]
+Path=Red Pulse - Text Select.ani
+
+[NWPen]
+Path=Red Pulse - Handwriting.ani
+
+[No]
+Path=Red Pulse - Unavailable.ani
+
+[SizeNS]
+Path=Red Pulse - Vertical Resize.ani
+
+[SizeWE]
+Path=Red Pulse - Horizontal Resize.ani
+
+[SizeNWSE]
+Path=Red Pulse - Diagonal L.ani
+
+[SizeNESW]
+Path=Red Pulse - Diagonal R.ani
+
+[SizeAll]
+Path=Red Pulse - Move.ani
+
+[UpArrow]
+Path=Red Pulse - Alternate Select.ani
+
+[Hand]
+Path=Red Pulse - Link.ani
+
