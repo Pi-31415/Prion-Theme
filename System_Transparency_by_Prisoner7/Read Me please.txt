@@ -1,0 +1,31 @@
+Thank you for downloading this and taking the time to read this. 
+
+	Inspiration
+I made this app because all of my computers have horrible graphics cards, and I do not have the money to buy better ones. I wanted transparency, so I made an app that forces transparency. It got popular, and I started building on to it. This is the result.
+
+
+	First notes
+I have spent quite a few hours making this program work. I would appreciate that you do not claim it as your own :o
+Please don't upload this zip file or any of the contents (other than Win7.png) to a website without asking. You can link to the download page, but not the file. 
+
+
+	System Requirements
+This app doesn't ask for much. It can run on Windows XP (limited functionality), Vista, and 7, on both 32 and 64 bit operating systems. It is recommended that you have a semi-decent graphics card (meaning 32bit)
+
+
+	Customizing the GUI
+You can edit any of the PNG files in the zip folder, but make sure to keep them the same aspect ratio, or the program may not display correctly. 
+
+
+	Usage
+IT IS VERY IMPORTANT THAT YOU TAKE HEED OF THIS
+Same programs (Photoshop and Gimp for example) don't work very well with this app sometimes. It has been reported that It will Bluescreen systems every so often if it is used with Photoshop and/or Gimp, but the affected programs are most likely not limited to those two. 
+
+If you turn the app off and transparency stays on for items, re-run the app, set the Transparency level to 255, select the affected items, and hit Okay. It should be fixed then. 
+
+
+	Last notes
+This program is still (and will probably continue to be) a beta. If you find any major bugs, please tell them to me on DeviantArt. Due to the scripting language I am using, not all bugs can be fixed, so take note of that. I will update this app whenever I have the time, as it is simply a side project.
+
+Once again, thanks for using.
+	Prisoner
