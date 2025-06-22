@@ -116,6 +116,14 @@ KillAestheticApps() {
 }
 
 RestartAestheticApps() {
+
+     try {
+        Run("C:\\Program Files\\Lively Wallpaper\\Lively.exe")
+        Sleep(1000) ; Wait 1 second
+    } catch {
+        ; Skip if it fails
+    }
+
     try {
         Run("C:\\Users\\paing\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe")
         Sleep(1000) ; Wait 1 second
@@ -159,12 +167,7 @@ RestartAestheticApps() {
         ; Skip if it fails
     }
     
-    try {
-        Run("C:\\Program Files\\WindowsApps\\12030rocksdanister.LivelyWallpaper_1.0.144.0_x64__97hta09mmv6hy\\Build\\Lively.exe")
-        Sleep(1000) ; Wait 1 second
-    } catch {
-        ; Skip if it fails
-    }
+   
 }
 
 ; Add a new shortcut to set transparency for any active window (including admin windows)
