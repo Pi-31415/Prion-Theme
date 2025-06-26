@@ -1,0 +1,300 @@
+/**
+ * SWARMIC Custom Modal System - Sharp Cyberpunk Theme
+ * Author: Pi Ko (pi.ko@nyu.edu)
+ * Date: 15 June 2025
+ * Version: v1.0.0
+ * 
+ * Changelog:
+ * v1.0.0 - Initial custom modal system with sharp square corners
+ */
+
+/* Custom Fonts */
+@font-face {
+    font-family: 'Ethnocentric';
+    src: url('/fonts/Ethnocentric.otf') format('opentype'),
+         url('/fonts/ethnocentric.woff2') format('woff2'),
+         url('/fonts/ethnocentric.woff') format('woff'),
+         url('/fonts/ethnocentric.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Nasalization';
+    src: url('/fonts/Nasalization.otf') format('opentype'),
+         url('/fonts/nasalization.woff2') format('woff2'),
+         url('/fonts/nasalization.woff') format('woff'),
+         url('/fonts/nasalization.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal Container */
+.modal-container {
+    background: var(--cyber-gray, #1a1a1a);
+    border: 2px solid var(--cyber-red, #ff073a);
+    max-width: 500px;
+    min-width: 300px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    transform: scale(0.8) translateY(-50px);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 30px rgba(255, 7, 58, 0.5);
+}
+
+.modal-overlay.active .modal-container {
+    transform: scale(1) translateY(0);
+}
+
+/* Modal Header */
+.modal-header {
+    background: var(--cyber-dark-gray, #111111);
+    border-bottom: 1px solid var(--cyber-red, #ff073a);
+    padding: 1rem 1.5rem;
+    position: relative;
+}
+
+.modal-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cyber-red, #ff073a), transparent);
+}
+
+.modal-title {
+    font-family: 'Ethnocentric', monospace;
+    font-size: 1.2rem;
+    color: var(--cyber-red, #ff073a);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+    text-shadow: 0 0 10px var(--cyber-red, #ff073a);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: 1px solid var(--cyber-red, #ff073a);
+    color: var(--cyber-red, #ff073a);
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-family: 'Ethnocentric', monospace;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: var(--cyber-red, #ff073a);
+    color: var(--cyber-white, #ffffff);
+    box-shadow: 0 0 15px rgba(255, 7, 58, 0.5);
+}
+
+/* Modal Body */
+.modal-body {
+    padding: 2rem 1.5rem;
+    color: var(--cyber-text, #e0e0e0);
+    font-family: 'Nasalization', monospace;
+    line-height: 1.6;
+}
+
+.modal-message {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    word-wrap: break-word;
+}
+
+/* Modal Footer */
+.modal-footer {
+    background: var(--cyber-dark-gray, #111111);
+    border-top: 1px solid var(--cyber-border, #333333);
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+/* Modal Buttons */
+.modal-btn {
+    background: var(--cyber-gray, #1a1a1a);
+    border: 1px solid var(--cyber-border, #333333);
+    color: var(--cyber-text, #e0e0e0);
+    padding: 0.8rem 1.5rem;
+    font-family: 'Nasalization', monospace;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 80px;
+}
+
+.modal-btn:hover {
+    background: var(--cyber-border, #333333);
+    color: var(--cyber-white, #ffffff);
+}
+
+.modal-btn.primary {
+    background: var(--cyber-red, #ff073a);
+    border-color: var(--cyber-red, #ff073a);
+    color: var(--cyber-white, #ffffff);
+}
+
+.modal-btn.primary:hover {
+    background: #cc0629;
+    box-shadow: 0 0 15px rgba(255, 7, 58, 0.5);
+}
+
+.modal-btn.secondary {
+    background: transparent;
+    border-color: var(--cyber-red, #ff073a);
+    color: var(--cyber-red, #ff073a);
+}
+
+.modal-btn.secondary:hover {
+    background: var(--cyber-red, #ff073a);
+    color: var(--cyber-white, #ffffff);
+}
+
+/* Modal Types */
+.modal-container.success .modal-header {
+    border-bottom-color: var(--cyber-success, #00ff88);
+}
+
+.modal-container.success .modal-title {
+    color: var(--cyber-success, #00ff88);
+    text-shadow: 0 0 10px var(--cyber-success, #00ff88);
+}
+
+.modal-container.success .modal-header::before {
+    background: linear-gradient(90deg, var(--cyber-success, #00ff88), transparent);
+}
+
+.modal-container.warning .modal-header {
+    border-bottom-color: var(--cyber-warning, #ffaa00);
+}
+
+.modal-container.warning .modal-title {
+    color: var(--cyber-warning, #ffaa00);
+    text-shadow: 0 0 10px var(--cyber-warning, #ffaa00);
+}
+
+.modal-container.warning .modal-header::before {
+    background: linear-gradient(90deg, var(--cyber-warning, #ffaa00), transparent);
+}
+
+.modal-container.error .modal-header {
+    border-bottom-color: var(--cyber-red, #ff073a);
+}
+
+.modal-container.error .modal-title {
+    color: var(--cyber-red, #ff073a);
+    text-shadow: 0 0 10px var(--cyber-red, #ff073a);
+}
+
+.modal-container.error .modal-header::before {
+    background: linear-gradient(90deg, var(--cyber-red, #ff073a), transparent);
+}
+
+/* Confirmation Modal Specific */
+.modal-container.confirm .modal-footer {
+    justify-content: space-between;
+}
+
+/* Loading Animation */
+.modal-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--cyber-border, #333333);
+    border-top-color: var(--cyber-red, #ff073a);
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 0.5rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modal-container {
+        width: 95%;
+        min-width: 280px;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 1rem;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .modal-btn {
+        width: 100%;
+        padding: 1rem;
+    }
+    
+    .modal-title {
+        font-size: 1rem;
+        padding-right: 40px;
+    }
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+/* Sharp Corners Override */
+* {
+    border-radius: 0 !important;
+}
+
+/* Glitch Effect for Critical Modals */
+.modal-container.critical {
+    animation: glitch 0.3s ease-in-out infinite;
+}
+
+@keyframes glitch {
+    0%, 100% { transform: scale(1) translateY(0); }
+    25% { transform: scale(1.01) translateY(-1px); }
+    50% { transform: scale(0.99) translateY(1px); }
+    75% { transform: scale(1.01) translateY(-1px); }
+} 

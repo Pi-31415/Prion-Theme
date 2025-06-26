@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<!-- saved from url=(0019)https://swarmic.io/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="chrome-extension://fgddmllnllkalaagkghckoinaemmogpe/src/scripts/content/location-spoofing.js"></script>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>🚀 SWARMIC - Personal Life Tracking OS</title>
+        <link rel="stylesheet" href="./🚀 SWARMIC - Personal Life Tracking OS_files/dashboard.css">
+        <link rel="stylesheet" href="./🚀 SWARMIC - Personal Life Tracking OS_files/modal.css">
+    </head>
+    <body>
+        <!-- Main Header -->
+        <header class="main-header">
+            <div class="logout-section">
+                <button class="logout-btn" onclick="logout()">
+                    🚪 Logout
+                </button>
+            </div>
+            
+            <div class="main-header-content">
+                <h1 class="main-title red-first">SWARMIC Personal OS</h1>
+                <p class="main-subtitle">Advanced Personal Life Tracking System</p>
+                
+                <!-- Search Bar Hero Section -->
+                <div class="hero-search-section">
+                    <form id="heroSearchForm" class="hero-search-form" onsubmit="performSearch(event)">
+                        <div class="hero-search-box">
+                            <input type="text" id="heroSearchInput" class="hero-search-input" placeholder="Search Google or navigate to system modules..." autocomplete="off" autofocus="">
+                            <button type="submit" class="hero-search-btn">
+                                <svg class="search-icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="cookie-notice">
+                    <strong>🔐 Session Status:</strong> Active session expires in 6 days
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Matrix -->
+        <div class="nav-container">
+            <!-- Core Modules -->
+            <section class="nav-section">
+                <h2 class="nav-section-title red-first">Core Modules</h2>
+                <div class="nav-grid">
+                    <a href="https://swarmic.io/users" class="nav-card">
+                        <div class="nav-card-header">
+                            <span class="nav-card-icon">👤</span>
+                            <h3 class="nav-card-title red-first">Users</h3>
+                        </div>
+                        <p class="nav-card-description">Manage user accounts and authentication settings</p>
+                    </a>
+                    
+                    <a href="https://swarmic.io/finance" class="nav-card">
+                        <div class="nav-card-header">
+                            <span class="nav-card-icon">💰</span>
+                            <h3 class="nav-card-title red-first">Finance</h3>
+                        </div>
+                        <p class="nav-card-description">Track spending, income, net worth, and financial accounts</p>
+                    </a>
+                    
+                    <a href="https://swarmic.io/health" class="nav-card">
+                        <div class="nav-card-header">
+                            <span class="nav-card-icon">🔬</span>
+                            <h3 class="nav-card-title red-first">Health</h3>
+                        </div>
+                        <p class="nav-card-description">Monitor body measurements, exercise logs, and sleep analysis</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Life Management -->
+            <section class="nav-section">
+                <h2 class="nav-section-title red-first">Life Management</h2>
+                <div class="nav-grid">
+                    <a href="https://swarmic.io/goals" class="nav-card">
+                        <div class="nav-card-header">
+                            <span class="nav-card-icon">🎯</span>
+                            <h3 class="nav-card-title red-first">Goals</h3>
+                        </div>
+                        <p class="nav-card-description">Set and track personal goals and project progress</p>
+                    </a>
+                    
+                    <a href="https://swarmic.io/contacts" class="nav-card">
+                        <div class="nav-card-header">
+                            <span class="nav-card-icon">👥</span>
+                            <h3 class="nav-card-title red-first">Contacts</h3>
+                        </div>
+                        <p class="nav-card-description">Manage personal and professional contacts</p>
+                    </a>
+                    
+                    <a href="https://swarmic.io/diary" class="nav-card">
+                        <div class="nav-card-header">
+                            <span class="nav-card-icon">📖</span>
+                            <h3 class="nav-card-title red-first">Diary</h3>
+                        </div>
+                        <p class="nav-card-description">Personal journal and daily reflection entries</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Learning & Development -->
+            <section class="nav-section">
+                <h2 class="nav-section-title red-first">Learning &amp; Development</h2>
+                <div class="nav-grid">
+                    <a href="https://swarmic.io/learning" class="nav-card">
+                        <div class="nav-card-header">
+                            <span class="nav-card-icon">📚</span>
+                            <h3 class="nav-card-title red-first">Learning</h3>
+                        </div>
+                        <p class="nav-card-description">Language learning and vocabulary building</p>
+                    </a>
+                    
+                    <a href="https://swarmic.io/skills" class="nav-card">
+                        <div class="nav-card-header">
+                            <span class="nav-card-icon">🛠️</span>
+                            <h3 class="nav-card-title red-first">Skills</h3>
+                        </div>
+                        <p class="nav-card-description">Track skill development and proficiency levels</p>
+                    </a>
+                    
+                    <a href="https://swarmic.io/books" class="nav-card">
+                        <div class="nav-card-header">
+                            <span class="nav-card-icon">📖</span>
+                            <h3 class="nav-card-title red-first">Books</h3>
+                        </div>
+                        <p class="nav-card-description">Reading list and book review management</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- System & Travel -->
+            <section class="nav-section">
+                <h2 class="nav-section-title red-first">System &amp; Utilities</h2>
+                <div class="nav-grid">
+                    <a href="https://swarmic.io/travel" class="nav-card">
+                        <div class="nav-card-header">
+                            <span class="nav-card-icon">✈️</span>
+                            <h3 class="nav-card-title red-first">Travel</h3>
+                        </div>
+                        <p class="nav-card-description">Log travel experiences and destinations</p>
+                    </a>
+                    
+                    <a href="https://swarmic.io/api" class="nav-card">
+                        <div class="nav-card-header">
+                            <span class="nav-card-icon">🔗</span>
+                            <h3 class="nav-card-title red-first">API</h3>
+                        </div>
+                        <p class="nav-card-description">API discovery and endpoint documentation</p>
+                    </a>
+                    
+                    <a href="https://swarmic.io/error-logs" class="nav-card">
+                        <div class="nav-card-header">
+                            <span class="nav-card-icon">🚨</span>
+                            <h3 class="nav-card-title red-first">Logs</h3>
+                        </div>
+                        <p class="nav-card-description">Real-time error monitoring and system logs</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Database Testing -->
+            <section class="test-section">
+                <h2 class="red-first">Database Connection Test</h2>
+                <div class="test-buttons">
+                    <button class="test-btn" onclick="testConnection()">Test Connection</button>
+                    <button class="test-btn" onclick="setupDatabase()">Setup Schema</button>
+                </div>
+                <div id="connection-result" class="result-display"></div>
+            </section>
+
+            <!-- Application Information -->
+            <section class="app-info">
+                <h3 class="red-first">System Information</h3>
+                <ul>
+                    <li><strong>Application:</strong> SWARMIC Personal OS</li>
+                    <li><strong>Author:</strong> Pi Ko (pi.ko@nyu.edu)</li>
+                    <li><strong>Date:</strong> 15 June 2025</li>
+                    <li><strong>Database:</strong> PostgreSQL on Sevalla</li>
+                    <li><strong>Framework:</strong> Express.js + Cyberpunk UI</li>
+                    <li><strong>Features:</strong> Complete CRUD for personal life tracking</li>
+                    <li><strong>Endpoints:</strong> 70+ API endpoints with verbose logging</li>
+                    <li><strong>Theme:</strong> Ethnocentric headings, Nasalization body text</li>
+                </ul>
+            </section>
+        </div>
+        
+        <!-- Custom Modal System -->
+        <div id="modalOverlay" class="modal-overlay">
+            <div id="modalContainer" class="modal-container">
+                <div class="modal-header">
+                    <h3 id="modalTitle" class="modal-title">System Message</h3>
+                    <button class="modal-close" onclick="closeModal()">×</button>
+                </div>
+                <div class="modal-body">
+                    <div id="modalMessage" class="modal-message"></div>
+                </div>
+                <div id="modalFooter" class="modal-footer">
+                    <button id="modalConfirm" class="modal-btn primary" onclick="closeModal()">OK</button>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // ============================================================================
+            // CUSTOM MODAL SYSTEM - REPLACES ALL BROWSER ALERTS
+            // ============================================================================
+            
+            function showModal(message, type = 'info', title = null, confirmCallback = null, cancelCallback = null) {
+                const overlay = document.getElementById('modalOverlay');
+                const container = document.getElementById('modalContainer');
+                const titleEl = document.getElementById('modalTitle');
+                const messageEl = document.getElementById('modalMessage');
+                const footerEl = document.getElementById('modalFooter');
+                
+                // Set title based on type if not provided
+                if (!title) {
+                    switch(type) {
+                        case 'success': title = '✅ Success'; break;
+                        case 'error': title = '❌ Error'; break;
+                        case 'warning': title = '⚠️ Warning'; break;
+                        case 'confirm': title = '❓ Confirmation'; break;
+                        case 'info':
+                        default: title = 'ℹ️ Information'; break;
+                    }
+                }
+                
+                // Set modal content
+                titleEl.textContent = title;
+                messageEl.innerHTML = message;
+                container.className = 'modal-container ' + type;
+                
+                // Configure buttons based on type
+                if (type === 'confirm') {
+                    footerEl.innerHTML = `
+                        <button class="modal-btn secondary" onclick="handleModalCancel()">Cancel</button>
+                        <button class="modal-btn primary" onclick="handleModalConfirm()">Confirm</button>
+                    `;
+                    window.modalConfirmCallback = confirmCallback;
+                    window.modalCancelCallback = cancelCallback;
+                } else {
+                    footerEl.innerHTML = `
+                        <button class="modal-btn primary" onclick="closeModal()">OK</button>
+                    `;
+                }
+                
+                // Show modal
+                overlay.classList.add('active');
+                
+                // Auto-focus the primary button
+                setTimeout(() => {
+                    const primaryBtn = footerEl.querySelector('.modal-btn.primary');
+                    if (primaryBtn) primaryBtn.focus();
+                }, 100);
+            }
+            
+            function closeModal() {
+                const overlay = document.getElementById('modalOverlay');
+                overlay.classList.remove('active');
+                window.modalConfirmCallback = null;
+                window.modalCancelCallback = null;
+            }
+            
+            function handleModalConfirm() {
+                closeModal();
+                if (window.modalConfirmCallback) {
+                    window.modalConfirmCallback();
+                }
+            }
+            
+            function handleModalCancel() {
+                closeModal();
+                if (window.modalCancelCallback) {
+                    window.modalCancelCallback();
+                }
+            }
+            
+            // Enhanced alert functions to replace browser alerts
+            function showAlert(message, type = 'info') {
+                showModal(message, type);
+            }
+            
+            function showSuccess(message) {
+                showModal(message, 'success');
+            }
+            
+            function showError(message) {
+                showModal(message, 'error');
+            }
+            
+            function showWarning(message) {
+                showModal(message, 'warning');
+            }
+            
+            function showConfirm(message, onConfirm, onCancel = null) {
+                showModal(message, 'confirm', null, onConfirm, onCancel);
+            }
+            
+            // Close modal on ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+            
+            // Close modal on overlay click
+            document.getElementById('modalOverlay').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+            
+            // ============================================================================
+            // DASHBOARD FUNCTIONS
+            // ============================================================================
+            
+            // Search functionality
+            function performSearch(event) {
+                event.preventDefault();
+                const query = document.getElementById('heroSearchInput').value.trim();
+                
+                if (!query) return;
+                
+                console.log('🔍 [SEARCH] Performing search for:', query);
+                
+                // Check for system module keywords first
+                const moduleKeywords = {
+                    'health': '/health',
+                    'finance': '/finance',
+                    'users': '/users', 
+                    'goals': '/goals',
+                    'contacts': '/contacts',
+                    'diary': '/diary',
+                    'learning': '/learning',
+                    'skills': '/skills',
+                    'books': '/books',
+                    'travel': '/travel',
+                    'api': '/api',
+                    'logs': '/error-logs',
+                    'sleep': '/health',
+                    'exercise': '/health',
+                    'body': '/health',
+                    'fitness': '/health'
+                };
+                
+                const lowerQuery = query.toLowerCase();
+                for (const [keyword, url] of Object.entries(moduleKeywords)) {
+                    if (lowerQuery.includes(keyword)) {
+                        console.log('🔍 [SEARCH] Found module match:', keyword, '->', url);
+                        window.location.href = url;
+                        return;
+                    }
+                }
+                
+                // Otherwise, search Google in same tab
+                console.log('🔍 [SEARCH] No module match, searching Google for:', query);
+                const searchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+                window.location.href = searchUrl;
+            }
+            
+            async function testConnection() {
+                console.log('Test Connection button clicked');
+                const resultDiv = document.getElementById('connection-result');
+                resultDiv.innerHTML = '<p>Testing connection...</p>';
+                
+                try {
+                    console.log('Making GET request to /api/test-db...');
+                    const response = await fetch('/api/test-db');
+                    console.log('Test DB response received:', response.status);
+                    
+                    const data = await response.json();
+                    console.log('Test DB result:', data);
+                    
+                    if (data.success) {
+                        resultDiv.innerHTML = `
+                            <h3 style="color: green;">✅ ${data.message}</h3>
+                            <p><strong>Timestamp:</strong> ${data.timestamp}</p>
+                        `;
+                    } else {
+                        resultDiv.innerHTML = `
+                            <h3 style="color: red;">❌ ${data.message}</h3>
+                            <p><strong>Error:</strong> ${data.error}</p>
+                        `;
+                    }
+                } catch (error) {
+                    console.error('Error testing connection:', error);
+                    resultDiv.innerHTML = `
+                        <h3 style="color: red;">❌ Request failed</h3>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                    `;
+                }
+            }
+            
+            async function setupDatabase() {
+                console.log('Setup Database button clicked');
+                const resultDiv = document.getElementById('connection-result');
+                resultDiv.innerHTML = '<p>Setting up database schema...</p>';
+                
+                try {
+                    console.log('Making POST request to /api/setup-database...');
+                    const response = await fetch('/api/setup-database', { method: 'POST' });
+                    console.log('Setup DB response received:', response.status);
+                    
+                    const data = await response.json();
+                    console.log('Setup DB result:', data);
+                    
+                    if (data.success) {
+                        resultDiv.innerHTML = `
+                            <h3 style="color: green;">✅ Database setup completed!</h3>
+                            <p>All tables and indexes have been created successfully.</p>
+                        `;
+                    } else {
+                        resultDiv.innerHTML = `
+                            <h3 style="color: red;">❌ Database setup failed</h3>
+                            <p><strong>Error:</strong> ${data.error}</p>
+                        `;
+                    }
+                } catch (error) {
+                    console.error('Error setting up database:', error);
+                    resultDiv.innerHTML = `
+                        <h3 style="color: red;">❌ Request failed</h3>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                    `;
+                }
+            }
+            
+            // Logout function
+            async function logout() {
+                showConfirm('Are you sure you want to logout?', async function() {
+                    try {
+                        console.log('Logging out...');
+                        await fetch('/api/logout', { method: 'POST' });
+                        console.log('Logout successful, redirecting...');
+                        window.location.reload();
+                    } catch (error) {
+                        console.error('Logout error:', error);
+                        window.location.reload(); // Force reload even if logout API fails
+                    }
+                });
+            }
+        </script>
+    
+    
+    </body></html>
