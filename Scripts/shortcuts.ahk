@@ -14,6 +14,7 @@ Shortcut List:
 10. Ctrl + Alt + R: Restart all aesthetic applications (Rainmeter, QuickLook, RoundedTB, System Transparency, Lively Wallpaper)
 11. Ctrl + Alt + A: Set transparency for the currently active window
 12. Ctrl + Alt + W: Custom transparency dialog for any window
+14. Ctrl + Alt + M: Open MusicBee
 
 13. On Startup: Automatically set Obsidian and Todoist window transparency to 210 after 30 seconds
 */
@@ -109,6 +110,13 @@ KillAestheticApps() {
             continue ; Skip and move to the next application without showing a message
         }
     }
+}
+
+^!m:: { ; Ctrl + Alt + M
+    Run("C:\Program Files (x86)\MusicBee\MusicBee.exe") ; Open MusicBee
+    ; Optional: Add transparency after MusicBee loads
+    ; Sleep(2000) ; Wait 2 seconds for MusicBee to load
+    ; SetTrans(230, "MusicBee") ; Set transparency if desired
 }
 
 ^!r:: { ; Ctrl + Alt + R
