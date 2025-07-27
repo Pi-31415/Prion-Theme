@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poof Decoder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        textarea, input[type="number"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            font-family: 'Courier New', monospace;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        textarea:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .result h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .result-content {
+            font-family: 'Courier New', monospace;
+            color: #555;
+            word-break: break-all;
+            line-height: 1.6;
+        }
+        
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .group-highlight {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 10px;
+            display: block;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🪄 Poof Decoder</h1>
+        
+        <div class="input-group">
+            <label for="encryptedInput">Paste encrypted string:</label>
+            <textarea 
+                id="encryptedInput" 
+                placeholder='Enter encrypted string or "Poof:encrypted string"'
+                autocomplete="off"
+                spellcheck="false"
+            ></textarea>
+        </div>
+        
+        <div class="input-group">
+            <label for="numGroups">Number of groups:</label>
+            <input 
+                type="number" 
+                id="numGroups" 
+                min="1" 
+                max="20" 
+                value="5"
+            >
+        </div>
+        
+        <button onclick="decryptPoof()">Decrypt</button>
+        
+        <div id="result" class="result">
+            <h3>Decrypted Result:</h3>
+            <div id="resultContent" class="result-content"></div>
+        </div>
+        
+        <div id="error" class="error"></div>
+    </div>
+
+    <script>
+        // XOR key (must match C++ code)
+        const XOR_KEY = 0x42;
+        
+        function xorDecrypt(str) {
+            let decrypted = '';
+            for (let i = 0; i < str.length; i++) {
+                decrypted += String.fromCharCode(str.charCodeAt(i) ^ XOR_KEY);
+            }
+            return decrypted;
+        }
+        
+        function reverseString(str) {
+            return str.split('').reverse().join('');
+        }
+        
+        function decryptPoof() {
+            const input = document.getElementById('encryptedInput').value.trim();
+            const numGroups = parseInt(document.getElementById('numGroups').value) || 5;
+            const resultDiv = document.getElementById('result');
+            const resultContent = document.getElementById('resultContent');
+            const errorDiv = document.getElementById('error');
+            
+            // Clear previous error
+            errorDiv.textContent = '';
+            
+            if (!input) {
+                errorDiv.textContent = 'Please enter an encrypted string';
+                resultDiv.style.display = 'none';
+                return;
+            }
+            
+            try {
+                // Extract encrypted string (handle both "Poof:string" and just "string")
+                let encrypted = input;
+                if (input.startsWith('Poof:')) {
+                    encrypted = input.substring(5);
+                }
+                
+                // Decrypt with XOR
+                const decrypted = xorDecrypt(encrypted);
+                
+                // Reverse the string to get original
+                const original = reverseString(decrypted);
+                
+                // Parse the original string to show components
+                const parts = original.split('$');
+                if (parts.length === 2) {
+                    // Extract last digit from input string
+                    let lastDigit = 0;
+                    const inputStr = parts[0];
+                    for (let i = inputStr.length - 1; i >= 0; i--) {
+                        if (!isNaN(inputStr[i]) && inputStr[i] !== ' ') {
+                            lastDigit = parseInt(inputStr[i]);
+                            break;
+                        }
+                    }
+                    
+                    // Calculate group number (1-indexed)
+                    const group = (lastDigit % numGroups) + 1;
+                    
+                    resultContent.innerHTML = 
+                        '<strong>Input String:</strong> ' + parts[0] + '<br>' +
+                        '<strong>DateTime:</strong> ' + parts[1] + '<br>' +
+                        '<strong>Full String:</strong> ' + original + '<br>' +
+                        '<strong>Last Digit:</strong> ' + lastDigit + '<br>' +
+                        '<span class="group-highlight">You are Group ' + group + '</span>';
+                } else {
+                    resultContent.textContent = original;
+                }
+                
+                // Display result
+                resultDiv.style.display = 'block';
+                
+            } catch (error) {
+                errorDiv.textContent = 'Error decrypting string. Please check the input.';
+                resultDiv.style.display = 'none';
+            }
+        }
+        
+        // Allow Enter key to decrypt
+        document.getElementById('encryptedInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                decryptPoof();
+            }
+        });
+    </script>
+</body>
+</html>

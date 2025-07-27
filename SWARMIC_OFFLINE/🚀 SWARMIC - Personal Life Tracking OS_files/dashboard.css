@@ -1,0 +1,533 @@
+/**
+ * SWARMIC Main Dashboard - Cyberpunk Theme
+ * Author: Pi Ko (pi.ko@nyu.edu)
+ * Date: 15 June 2025
+ * Version: 1.1.0
+ * 
+ * Changelog:
+ * v1.1.0 - Added hero search functionality with Google-style search bar and cyberpunk styling
+ *        - Updated background pattern from diamond checkerboard to subtle dots
+ *        - Enhanced responsive design for mobile search experience
+ * v1.0.0 - Initial cyberpunk dashboard theme with responsive navigation matrix
+ */
+
+/* Custom Fonts */
+@font-face {
+    font-family: 'Ethnocentric';
+    src: url('/fonts/Ethnocentric.otf') format('opentype'),
+         url('/fonts/ethnocentric.woff2') format('woff2'),
+         url('/fonts/ethnocentric.woff') format('woff'),
+         url('/fonts/ethnocentric.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Nasalization';
+    src: url('/fonts/Nasalization.otf') format('opentype'),
+         url('/fonts/nasalization.woff2') format('woff2'),
+         url('/fonts/nasalization.woff') format('woff'),
+         url('/fonts/nasalization.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cyber-black: #0a0a0a;
+    --cyber-red: #ff073a;
+    --cyber-red-glow: #ff073a99;
+    --cyber-white: #ffffff;
+    --cyber-gray: #1a1a1a;
+    --cyber-dark-gray: #111111;
+    --cyber-border: #333333;
+    --cyber-text: #e0e0e0;
+    --cyber-success: #00ff88;
+    --cyber-warning: #ffaa00;
+}
+
+body {
+    font-family: 'Nasalization', 'Courier New', 'Consolas', monospace;
+    background: var(--cyber-black);
+    color: var(--cyber-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Animated Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, var(--cyber-red-glow) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, var(--cyber-red-glow) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, var(--cyber-red-glow) 0%, transparent 50%);
+    opacity: 0.1;
+    z-index: -1;
+    animation: pulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.05; }
+    100% { opacity: 0.15; }
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Ethnocentric', 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.red-first::first-letter {
+    color: var(--cyber-red);
+    text-shadow: 0 0 10px var(--cyber-red);
+}
+
+/* Main Header */
+.main-header {
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+    background: linear-gradient(135deg, var(--cyber-dark-gray) 0%, var(--cyber-black) 100%);
+    border-bottom: 1px solid var(--cyber-red);
+    position: relative;
+}
+
+.main-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff073a' fill-opacity='0.08'%3E%3Ccircle cx='20' cy='20' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    opacity: 0.4;
+}
+
+.main-header-content {
+    position: relative;
+    z-index: 1;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px var(--cyber-red);
+}
+
+.main-subtitle {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+}
+
+/* Hero Search Section */
+.hero-search-section {
+    margin: 2rem 0 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-search-form {
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+}
+
+.hero-search-box {
+    display: flex;
+    background: var(--cyber-dark-gray);
+    border: 2px solid var(--cyber-border);
+    border-radius: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.hero-search-box:hover,
+.hero-search-box:focus-within {
+    border-color: var(--cyber-red);
+    box-shadow: 0 0 20px rgba(255, 7, 58, 0.3);
+}
+
+.hero-search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 1rem 1.5rem;
+    color: var(--cyber-white);
+    font-family: 'Nasalization', monospace;
+    font-size: 1rem;
+    outline: none;
+    letter-spacing: 0.5px;
+}
+
+.hero-search-input::placeholder {
+    color: var(--cyber-text);
+    opacity: 0.7;
+}
+
+.hero-search-btn {
+    background: var(--cyber-red);
+    border: none;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-search-btn:hover {
+    background: #cc0629;
+    box-shadow: 0 0 15px var(--cyber-red-glow);
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--cyber-white);
+}
+
+/* Cookie Expiration Notice */
+.cookie-notice {
+    background: var(--cyber-dark-gray);
+    border: 1px solid var(--cyber-red);
+    border-radius: 5px;
+    padding: 0.8rem 1.5rem;
+    margin: 1rem auto;
+    max-width: 400px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.cookie-notice strong {
+    color: var(--cyber-red);
+}
+
+/* Logout Button */
+.logout-section {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+}
+
+.logout-btn {
+    background: linear-gradient(45deg, var(--cyber-red), #cc0629);
+    color: var(--cyber-white);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    font-family: 'Nasalization', monospace;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+}
+
+.logout-btn:hover {
+    box-shadow: 0 0 15px var(--cyber-red-glow);
+    transform: translateY(-2px);
+}
+
+/* Navigation Matrix */
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.nav-section {
+    margin-bottom: 3rem;
+}
+
+.nav-section-title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--cyber-red);
+    text-shadow: 0 0 10px var(--cyber-red);
+}
+
+.nav-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Navigation Cards */
+.nav-card {
+    background: var(--cyber-gray);
+    border: 1px solid var(--cyber-border);
+    border-radius: 10px;
+    padding: 2rem;
+    text-decoration: none;
+    color: var(--cyber-text);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+
+.nav-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cyber-red), transparent);
+}
+
+.nav-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--cyber-red);
+    box-shadow: 0 10px 30px rgba(255, 7, 58, 0.2);
+    color: var(--cyber-white);
+    text-decoration: none;
+}
+
+.nav-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.nav-card-icon {
+    font-size: 2rem;
+    color: var(--cyber-red);
+    margin-right: 1rem;
+}
+
+.nav-card-title {
+    font-family: 'Ethnocentric', monospace;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-card-description {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    line-height: 1.5;
+}
+
+/* Test Buttons Section */
+.test-section {
+    background: var(--cyber-dark-gray);
+    border: 1px solid var(--cyber-border);
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.test-section h2 {
+    color: var(--cyber-red);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.test-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.test-btn {
+    background: transparent;
+    border: 1px solid var(--cyber-red);
+    color: var(--cyber-red);
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-family: 'Nasalization', monospace;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+}
+
+.test-btn:hover {
+    background: var(--cyber-red);
+    color: var(--cyber-white);
+    box-shadow: 0 0 15px var(--cyber-red-glow);
+}
+
+/* Result Display */
+.result-display {
+    background: var(--cyber-black);
+    border: 1px solid var(--cyber-border);
+    border-radius: 5px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    font-family: 'Nasalization', monospace;
+    font-size: 0.9rem;
+    min-height: 100px;
+    color: var(--cyber-text);
+}
+
+.result-display.success {
+    border-color: var(--cyber-success);
+    background: rgba(0, 255, 136, 0.1);
+}
+
+.result-display.error {
+    border-color: var(--cyber-red);
+    background: rgba(255, 7, 58, 0.1);
+}
+
+/* App Info Section */
+.app-info {
+    background: var(--cyber-dark-gray);
+    border: 1px solid var(--cyber-border);
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.app-info h3 {
+    color: var(--cyber-red);
+    margin-bottom: 1rem;
+}
+
+.app-info ul {
+    list-style: none;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.app-info li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--cyber-border);
+}
+
+.app-info li:last-child {
+    border-bottom: none;
+}
+
+.app-info strong {
+    color: var(--cyber-red);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .nav-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2rem;
+    }
+    
+    .logout-section {
+        position: static;
+        text-align: center;
+        margin-top: 1rem;
+    }
+    
+    .hero-search-form {
+        max-width: 100%;
+        margin: 0 1rem;
+    }
+    
+    .hero-search-input {
+        font-size: 0.9rem;
+        padding: 0.8rem 1rem;
+    }
+    
+    .hero-search-btn {
+        padding: 0.8rem 1rem;
+    }
+    
+    .search-icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .nav-container {
+        padding: 2rem 1rem;
+    }
+    
+    .nav-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+    }
+    
+    .nav-card {
+        padding: 1.5rem;
+    }
+    
+    .nav-card-title {
+        font-size: 1rem;
+    }
+    
+    .test-buttons {
+        gap: 0.5rem;
+    }
+    
+    .test-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .main-header {
+        padding: 2rem 1rem 1rem;
+    }
+    
+    .nav-container {
+        padding: 1.5rem 1rem;
+    }
+}
+
+/* Loading States */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--cyber-border);
+    border-radius: 50%;
+    border-top-color: var(--cyber-red);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Hidden Class */
+.hidden {
+    display: none !important;
+}
+
+/* Sharp Corners - No Rounded Corners Anywhere */
+* {
+    border-radius: 0 !important;
+} 
