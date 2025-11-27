@@ -7,7 +7,16 @@ Each category (sleep, calories, exercise, bodyweight, finance, net worth) gets i
 
 Author: Pi Ko (pi.ko@nyu.edu)
 Created: October 24, 2025
-Version: 1.0
+Version: v1.1
+
+Changelog:
+    v1.1 - 27 November 2025
+        - Fixed JSON structure normalization to handle new export format with success wrapper
+        - Added support for nested data structure (success → data → data)
+        - Maintains backward compatibility with older flat JSON exports
+    
+    v1.0 - 24 October 2025
+        - Initial release with basic JSON to CSV conversion
 
 Requirements:
     - pandas
@@ -104,10 +113,19 @@ class SwarmicJSONToCSVConverter:
 
     def _load_json(self) -> Dict[str, Any]:
         """
-        Load and parse the JSON file.
+        Load and parse the JSON file, and normalize it into the expected structure:
+            {
+              "version": "...",
+              "exported_at": "...",
+              "data": { ...categories... }
+            }
+
+        This method handles both old and new Swarmic export formats:
+        - Old format: Direct structure with version, exported_at, and data
+        - New format: Wrapped in success object with nested data structure
 
         Returns:
-            Dict[str, Any]: Parsed JSON data
+            Dict[str, Any]: Parsed and normalized JSON data
 
         Raises:
             json.JSONDecodeError: If JSON file is malformed
@@ -115,7 +133,32 @@ class SwarmicJSONToCSVConverter:
         print(f"📂 Loading JSON file: {self.json_file_path}")
         try:
             with open(self.json_file_path, 'r', encoding='utf-8') as f:
-                data = json.load(f)
+                raw = json.load(f)
+
+            # Handle newer Swarmic export shape:
+            # {
+            #   "success": true,
+            #   "data": {
+            #       "version": "...",
+            #       "exported_at": "...",
+            #       "data": { ... categories ... }
+            #   }
+            # }
+            if isinstance(raw, dict) and "success" in raw and isinstance(raw.get("data"), dict):
+                inner = raw["data"]
+                if isinstance(inner, dict) and "data" in inner and isinstance(inner["data"], dict):
+                    data = {
+                        "version": inner.get("version"),
+                        "exported_at": inner.get("exported_at"),
+                        "data": inner["data"],
+                    }
+                else:
+                    # Fallback: treat inner as already normalized
+                    data = inner
+            else:
+                # Older / already-normalized exports
+                data = raw
+
             print(f"✅ Successfully loaded JSON (version: {data.get('version', 'unknown')})")
             return data
         except json.JSONDecodeError as e:

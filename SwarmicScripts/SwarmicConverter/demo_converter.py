@@ -12,7 +12,7 @@ def demo_conversion():
     Demonstrate the conversion process with a sample file.
     """
     # Example usage - replace with your actual file path
-    json_file = "swarmic_export_2025-10-24.json"
+    json_file = "swarmic_export_2025-11-27 (1).json"
     
     # Check if file exists
     if not Path(json_file).exists():
